@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lic. Daniel Gallo — Quiropraxia</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --azul: #1a4a7a;
+  --azul-dark: #0f2d52;
+  --azul-med: #2563a8;
+  --azul-light: #e8f2fc;
+  --azul-mist: #f0f7ff;
+  --celeste: #4a90c4;
+  --texto: #0f1f35;
+  --texto-muted: #5a7080;
+  --borde: rgba(26,74,122,0.15);
+  --fondo: #f5f9fd;
+  --blanco: #ffffff;
+  --success: #2ecc71;
+}
+html { scroll-behavior: smooth; }
+body { font-family: 'DM Sans', sans-serif; background: var(--fondo); color: var(--texto); overflow-x: hidden; }
+
+/* NAV */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  background: rgba(255,255,255,0.95); backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--borde);
+  padding: 0 2rem; height: 68px;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.nav-logo { display: flex; flex-direction: column; }
+.nav-logo-top { font-family: 'Syne', sans-serif; font-size: 1rem; font-weight: 800; color: var(--azul); letter-spacing: 0.5px; }
+.nav-logo-sub { font-size: 10px; color: var(--texto-muted); letter-spacing: 2px; text-transform: uppercase; }
+.nav-links { display: flex; gap: 2rem; list-style: none; }
+.nav-links a { font-size: 12px; font-weight: 500; color: var(--texto-muted); text-decoration: none; letter-spacing: 1px; text-transform: uppercase; transition: color 0.2s; }
+.nav-links a:hover { color: var(--azul); }
+.nav-cta { background: var(--azul); color: white; border: none; border-radius: 6px; padding: 10px 20px; font-family: 'DM Sans', sans-serif; font-size: 12px; font-weight: 600; cursor: pointer; letter-spacing: 1px; text-transform: uppercase; text-decoration: none; transition: background 0.2s; }
+.nav-cta:hover { background: var(--azul-dark); color: white; }
+
+/* HERO */
+.hero {
+  min-height: 100vh;
+  background: linear-gradient(135deg, var(--azul-dark) 0%, var(--azul) 60%, var(--azul-med) 100%);
+  display: flex; align-items: center;
+  padding: 8rem 2rem 4rem;
+  position: relative; overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute; top: -100px; right: -100px;
+  width: 500px; height: 500px;
+  background: radial-gradient(circle, rgba(74,144,196,0.2), transparent 70%);
+}
+.hero::after {
+  content: '';
+  position: absolute; bottom: -80px; left: -80px;
+  width: 400px; height: 400px;
+  background: radial-gradient(circle, rgba(255,255,255,0.05), transparent 70%);
+}
+.hero-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; width: 100%; }
+.hero-content { position: relative; z-index: 1; }
+.hero-tag { display: inline-flex; align-items: center; gap: 8px; font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: rgba(255,255,255,0.7); font-weight: 500; margin-bottom: 1.25rem; border: 1px solid rgba(255,255,255,0.2); border-radius: 20px; padding: 5px 14px; }
+.hero h1 { font-family: 'Syne', sans-serif; font-size: clamp(2.2rem,5vw,3.5rem); font-weight: 800; color: white; line-height: 1.1; margin-bottom: 1rem; letter-spacing: -0.5px; }
+.hero h1 em { font-style: normal; color: #7ec8e3; }
+.hero-sub { font-size: 15px; color: rgba(255,255,255,0.7); line-height: 1.8; max-width: 460px; margin-bottom: 2rem; }
+.hero-btns { display: flex; gap: 12px; flex-wrap: wrap; }
+.btn-white { background: white; color: var(--azul); border: none; border-radius: 6px; padding: 14px 28px; font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; cursor: pointer; text-decoration: none; transition: all 0.2s; }
+.btn-white:hover { background: #f0f7ff; transform: translateY(-2px); color: var(--azul); }
+.btn-outline-white { background: transparent; color: white; border: 1.5px solid rgba(255,255,255,0.4); border-radius: 6px; padding: 14px 28px; font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; cursor: pointer; text-decoration: none; transition: all 0.2s; }
+.btn-outline-white:hover { border-color: white; background: rgba(255,255,255,0.1); color: white; }
+
+.hero-visual { position: relative; z-index: 1; }
+.hero-card-main {
+  background: rgba(255,255,255,0.1); backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,0.2); border-radius: 16px;
+  padding: 2rem; text-align: center;
+}
+.hero-spine { font-size: 8rem; display: block; margin-bottom: 1rem; filter: drop-shadow(0 0 20px rgba(126,200,227,0.3)); }
+.hero-name { font-family: 'Syne', sans-serif; font-size: 1.2rem; font-weight: 700; color: white; margin-bottom: 4px; }
+.hero-title { font-size: 13px; color: rgba(255,255,255,0.7); margin-bottom: 1rem; }
+.hero-badges { display: flex; flex-direction: column; gap: 8px; }
+.hero-badge { background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); border-radius: 8px; padding: 8px 14px; font-size: 12px; color: rgba(255,255,255,0.85); display: flex; align-items: center; gap: 8px; }
+
+/* SÍNTOMAS */
+.sintomas-wrap { background: var(--blanco); padding: 5rem 2rem; }
+.sintomas { max-width: 1100px; margin: 0 auto; }
+.section-tag { font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--azul); font-weight: 600; margin-bottom: 0.75rem; display: block; }
+.section-title { font-family: 'Syne', sans-serif; font-size: clamp(1.8rem,4vw,2.8rem); font-weight: 800; margin-bottom: 0.5rem; letter-spacing: -0.5px; }
+.section-title em { font-style: normal; color: var(--azul); }
+.section-sub { font-size: 14px; color: var(--texto-muted); margin-bottom: 3rem; max-width: 500px; line-height: 1.7; }
+.sintomas-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+.sint-card { background: var(--azul-mist); border: 1px solid var(--borde); border-radius: 12px; padding: 1.5rem; display: flex; align-items: flex-start; gap: 12px; transition: transform 0.2s, box-shadow 0.2s; }
+.sint-card:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(26,74,122,0.1); }
+.sint-icon { font-size: 1.75rem; flex-shrink: 0; }
+.sint-nombre { font-weight: 700; font-size: 14px; margin-bottom: 3px; }
+.sint-desc { font-size: 12px; color: var(--texto-muted); line-height: 1.5; }
+
+/* SOBRE MÍ */
+.sobre-wrap { background: var(--azul-mist); padding: 6rem 2rem; }
+.sobre { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
+.sobre-visual {
+  background: linear-gradient(135deg, var(--azul) 0%, var(--azul-med) 100%);
+  border-radius: 16px; padding: 2.5rem;
+  color: white; position: relative; overflow: hidden;
+}
+.sobre-visual::before { content: ''; position: absolute; top: -60px; right: -60px; width: 200px; height: 200px; background: rgba(255,255,255,0.05); border-radius: 50%; }
+.sobre-foto-placeholder { font-size: 6rem; text-align: center; margin-bottom: 1rem; position: relative; z-index: 1; }
+.sobre-visual-name { font-family: 'Syne', sans-serif; font-size: 1.2rem; font-weight: 700; text-align: center; margin-bottom: 4px; position: relative; z-index: 1; }
+.sobre-visual-title { font-size: 12px; color: rgba(255,255,255,0.7); text-align: center; margin-bottom: 1.5rem; position: relative; z-index: 1; }
+.sobre-visual-items { display: flex; flex-direction: column; gap: 10px; position: relative; z-index: 1; }
+.svi { display: flex; align-items: flex-start; gap: 10px; font-size: 13px; color: rgba(255,255,255,0.85); background: rgba(255,255,255,0.1); border-radius: 8px; padding: 10px 12px; }
+.sobre h2 { font-family: 'Syne', sans-serif; font-size: 2.2rem; font-weight: 800; margin-bottom: 1rem; letter-spacing: -0.5px; }
+.sobre h2 em { font-style: normal; color: var(--azul); }
+.sobre p { font-size: 14px; color: var(--texto-muted); line-height: 1.9; margin-bottom: 1rem; }
+.sobre-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 1.5rem; }
+.chip { background: var(--azul-light); color: var(--azul-dark); border: 1px solid var(--borde); border-radius: 20px; padding: 5px 14px; font-size: 12px; font-weight: 500; }
+
+/* SEDES */
+.sedes-wrap { background: var(--blanco); padding: 6rem 2rem; }
+.sedes { max-width: 1100px; margin: 0 auto; }
+.sedes-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 3rem; }
+.sede-card { border: 1px solid var(--borde); border-radius: 12px; overflow: hidden; transition: transform 0.2s, box-shadow 0.2s; }
+.sede-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(26,74,122,0.12); }
+.sede-header { background: linear-gradient(135deg, var(--azul), var(--azul-med)); padding: 1.25rem; color: white; }
+.sede-header-icon { font-size: 1.5rem; margin-bottom: 0.5rem; display: block; }
+.sede-nombre { font-family: 'Syne', sans-serif; font-size: 1rem; font-weight: 700; }
+.sede-ciudad { font-size: 11px; opacity: 0.8; letter-spacing: 1px; text-transform: uppercase; }
+.sede-body { padding: 1.25rem; background: var(--azul-mist); }
+.sede-dir { font-size: 13px; color: var(--texto-muted); display: flex; align-items: flex-start; gap: 8px; margin-bottom: 10px; }
+.sede-dir strong { color: var(--texto); display: block; }
+.sede-mapa { display: flex; align-items: center; gap: 6px; background: var(--azul); color: white; border-radius: 6px; padding: 8px 14px; font-size: 12px; font-weight: 600; text-decoration: none; transition: background 0.2s; }
+.sede-mapa:hover { background: var(--azul-dark); color: white; }
+
+/* PROCESO */
+.proceso-wrap { background: var(--azul-mist); padding: 6rem 2rem; }
+.proceso { max-width: 900px; margin: 0 auto; text-align: center; }
+.proceso-steps { display: grid; grid-template-columns: repeat(4,1fr); gap: 1.5rem; margin-top: 3rem; position: relative; }
+.proceso-steps::before { content: ''; position: absolute; top: 26px; left: 15%; right: 15%; height: 1px; background: linear-gradient(to right, var(--borde), var(--azul), var(--borde)); }
+.paso { text-align: center; }
+.paso-num { width: 52px; height: 52px; border-radius: 50%; background: var(--azul); color: white; font-family: 'Syne', sans-serif; font-size: 1.2rem; font-weight: 700; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem; box-shadow: 0 4px 16px rgba(26,74,122,0.3); }
+.paso h4 { font-family: 'Syne', sans-serif; font-size: 0.9rem; font-weight: 700; margin-bottom: 0.4rem; }
+.paso p { font-size: 12px; color: var(--texto-muted); line-height: 1.6; }
+
+/* TURNOS */
+.turnos-wrap { background: var(--blanco); padding: 6rem 2rem; }
+.turnos { max-width: 960px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
+.turnos-form { background: var(--azul-mist); border-radius: 16px; padding: 2.5rem; border: 1px solid var(--borde); }
+.turnos-form h3 { font-family: 'Syne', sans-serif; font-size: 1.4rem; font-weight: 800; margin-bottom: 0.25rem; }
+.turnos-form p { font-size: 13px; color: var(--texto-muted); margin-bottom: 1.5rem; padding-bottom: 1rem; border-bottom: 1px solid var(--borde); }
+.fg { margin-bottom: 14px; }
+.fg label { display: block; font-size: 11px; font-weight: 700; color: var(--texto-muted); margin-bottom: 5px; text-transform: uppercase; letter-spacing: 0.5px; }
+.fg input, .fg select { width: 100%; border: 1.5px solid var(--borde); border-radius: 8px; padding: 11px 14px; font-size: 14px; font-family: 'DM Sans', sans-serif; color: var(--texto); background: var(--blanco); outline: none; transition: border-color 0.15s; }
+.fg input:focus, .fg select:focus { border-color: var(--azul); box-shadow: 0 0 0 3px rgba(26,74,122,0.1); }
+.aviso-box { background: #fff8e1; border: 1px solid #ffe082; border-radius: 8px; padding: 10px 14px; font-size: 12px; color: #7a6000; margin-bottom: 14px; line-height: 1.6; }
+.btn-turno { width: 100%; background: var(--azul); color: white; border: none; border-radius: 8px; padding: 15px; font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; cursor: pointer; margin-top: 0.5rem; transition: background 0.2s, transform 0.15s; }
+.btn-turno:hover { background: var(--azul-dark); transform: translateY(-1px); }
+.turnos-info h3 { font-family: 'Syne', sans-serif; font-size: 2rem; font-weight: 800; margin-bottom: 1rem; letter-spacing: -0.5px; }
+.turnos-info h3 em { font-style: normal; color: var(--azul); }
+.turnos-info p { font-size: 14px; color: var(--texto-muted); line-height: 1.8; margin-bottom: 1.5rem; }
+.info-items { display: flex; flex-direction: column; gap: 14px; }
+.info-item { display: flex; gap: 12px; font-size: 13px; }
+.info-item .icon { font-size: 1.2rem; flex-shrink: 0; }
+.info-item strong { display: block; font-weight: 600; color: var(--texto); }
+.info-item span { color: var(--texto-muted); }
+
+/* CONTACTO */
+.cta-wrap { background: linear-gradient(135deg, var(--azul-dark), var(--azul)); padding: 4rem 2rem; text-align: center; }
+.cta-wrap h2 { font-family: 'Syne', sans-serif; font-size: clamp(1.8rem,4vw,2.8rem); font-weight: 800; color: white; margin-bottom: 0.5rem; letter-spacing: -0.5px; }
+.cta-wrap p { color: rgba(255,255,255,0.7); font-size: 14px; margin-bottom: 2rem; }
+.cta-btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+.cta-btn { display: flex; align-items: center; gap: 8px; background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.3); border-radius: 8px; padding: 12px 24px; font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 600; color: white; text-decoration: none; transition: background 0.2s, transform 0.15s; }
+.cta-btn:hover { background: rgba(255,255,255,0.25); transform: translateY(-2px); color: white; }
+
+footer { background: var(--azul-dark); color: rgba(255,255,255,0.4); padding: 1.5rem 2rem; text-align: center; font-size: 12px; letter-spacing: 1px; }
+footer span { color: rgba(255,255,255,0.7); }
+
+/* CHATBOT */
+.chat-fab { position: fixed; bottom: 24px; right: 24px; z-index: 500; width: 58px; height: 58px; border-radius: 50%; background: var(--azul); color: white; border: none; font-size: 1.5rem; cursor: pointer; box-shadow: 0 4px 20px rgba(26,74,122,0.5); transition: transform 0.2s; display: flex; align-items: center; justify-content: center; }
+.chat-fab:hover { transform: scale(1.1); }
+.chat-notif { position: absolute; top: 0; right: 0; width: 16px; height: 16px; background: #e83e3e; border-radius: 50%; border: 2px solid white; font-size: 9px; display: flex; align-items: center; justify-content: center; color: white; font-weight: 700; }
+.chat-box { position: fixed; bottom: 96px; right: 24px; z-index: 500; width: 310px; background: white; border-radius: 16px; box-shadow: 0 8px 40px rgba(0,0,0,0.15); display: none; flex-direction: column; overflow: hidden; max-height: 480px; border: 1px solid var(--borde); }
+.chat-box.open { display: flex; animation: chatIn 0.25s ease; }
+@keyframes chatIn { from{opacity:0;transform:translateY(12px)} to{opacity:1;transform:translateY(0)} }
+.chat-head { background: linear-gradient(135deg, var(--azul-dark), var(--azul)); color: white; padding: 14px 16px; display: flex; align-items: center; gap: 10px; }
+.chat-avatar { width: 36px; height: 36px; border-radius: 50%; background: rgba(255,255,255,0.2); display: flex; align-items: center; justify-content: center; font-size: 1.1rem; flex-shrink: 0; }
+.chat-head-name { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 13px; }
+.chat-head-status { font-size: 11px; opacity: 0.85; }
+.chat-x { background: none; border: none; color: white; font-size: 1.2rem; cursor: pointer; margin-left: auto; opacity: 0.8; }
+.chat-msgs { flex: 1; overflow-y: auto; padding: 12px; display: flex; flex-direction: column; gap: 8px; background: #f5f9fd; }
+.cmsg { max-width: 85%; }
+.cmsg.bot { align-self: flex-start; }
+.cmsg.usr { align-self: flex-end; }
+.cbubble { padding: 8px 12px; border-radius: 12px; font-size: 13px; line-height: 1.5; }
+.cmsg.bot .cbubble { background: white; color: var(--texto); border: 1px solid var(--borde); border-radius: 2px 12px 12px 12px; }
+.cmsg.usr .cbubble { background: var(--azul); color: white; border-radius: 12px 2px 12px 12px; }
+.chat-chips { display: flex; flex-wrap: wrap; gap: 5px; padding: 6px 10px 8px; background: #f5f9fd; }
+.cchip { background: white; border: 1.5px solid var(--azul); color: var(--azul); border-radius: 20px; padding: 4px 10px; font-size: 11px; font-weight: 600; cursor: pointer; font-family: 'DM Sans', sans-serif; transition: all 0.15s; }
+.cchip:hover { background: var(--azul); color: white; }
+.chat-input-row { display: flex; gap: 6px; padding: 8px 10px; border-top: 1px solid var(--borde); background: white; }
+.chat-inp { flex: 1; border: 1.5px solid var(--borde); border-radius: 20px; padding: 7px 12px; font-size: 13px; font-family: 'DM Sans', sans-serif; outline: none; }
+.chat-inp:focus { border-color: var(--azul); }
+.chat-send { background: var(--azul); color: white; border: none; border-radius: 50%; width: 32px; height: 32px; cursor: pointer; font-size: 0.9rem; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.chat-send:hover { background: var(--azul-dark); }
+
+.alert { display: none; position: fixed; top: 80px; left: 50%; transform: translateX(-50%); background: var(--azul); color: white; padding: 12px 28px; border-radius: 8px; font-weight: 600; font-size: 14px; z-index: 999; box-shadow: 0 8px 24px rgba(26,74,122,0.3); white-space: nowrap; }
+.reveal { opacity: 0; transform: translateY(24px); transition: all 0.6s ease; }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+@media(max-width:900px) {
+  .hero-inner { grid-template-columns: 1fr; }
+  .hero-visual { display: none; }
+  .sobre { grid-template-columns: 1fr; }
+  .sintomas-grid { grid-template-columns: 1fr; }
+  .sedes-grid { grid-template-columns: 1fr; }
+  .proceso-steps { grid-template-columns: repeat(2,1fr); }
+  .proceso-steps::before { display: none; }
+  .turnos { grid-template-columns: 1fr; }
+  .nav-links { display: none; }
+}
+</style>
+</head>
+<body>
+
+<div class="alert" id="alert"></div>
+
+<nav>
+  <div class="nav-logo">
+    <span class="nav-logo-top">Lic. Daniel Gallo</span>
+    <span class="nav-logo-sub">Kinesiólogo · Quiropraxia</span>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#sobre">Sobre mí</a></li>
+    <li><a href="#sedes">Sedes</a></li>
+    <li><a href="#turnos">Turnos</a></li>
+    <li><a href="#contacto">Contacto</a></li>
+  </ul>
+  <a href="#turnos" class="nav-cta">Pedir turno</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-content">
+      <div class="hero-tag">🦴 Kinesiólogo · Quiropraxia</div>
+      <h1>Tu columna<br>merece el mejor <em>cuidado</em></h1>
+      <p class="hero-sub">Especialista en Quiropraxia. Atención en Santiago del Estero Capital, Termas de Río Hondo y La Banda. Miembro de la Fundación FullSpine.</p>
+      <div class="hero-btns">
+        <a href="#turnos" class="btn-white">Pedir turno</a>
+        <a href="https://wa.me/5493854126758" class="btn-outline-white">💬 WhatsApp</a>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="hero-card-main">
+        <span class="hero-spine">🦴</span>
+        <div class="hero-name">Lic. Daniel Alejandro Gallo</div>
+        <div class="hero-title">Kinesiólogo · Especialista en Quiropraxia</div>
+        <div class="hero-badges">
+          <div class="hero-badge">🎓 Universidad Nacional de Córdoba</div>
+          <div class="hero-badge">🏛️ Miembro Fundación FullSpine</div>
+          <div class="hero-badge">📍 3 sedes en Santiago del Estero</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SÍNTOMAS -->
+<div class="sintomas-wrap" id="sintomas">
+  <div class="sintomas">
+    <span class="section-tag reveal">¿Cuándo consultar?</span>
+    <h2 class="section-title reveal">Podemos <em>ayudarte</em> si tenés</h2>
+    <p class="section-sub reveal">La Quiropraxia puede aliviar una gran variedad de síntomas. Consultá si presentás alguno de estos:</p>
+    <div class="sintomas-grid">
+      <div class="sint-card reveal"><span class="sint-icon">🌀</span><div><div class="sint-nombre">Mareos</div><div class="sint-desc">Vértigos y sensación de inestabilidad relacionados con la columna cervical.</div></div></div>
+      <div class="sint-card reveal"><span class="sint-icon">🤯</span><div><div class="sint-nombre">Cefaleas</div><div class="sint-desc">Dolores de cabeza frecuentes, tensionales o de origen cervicogénico.</div></div></div>
+      <div class="sint-card reveal"><span class="sint-icon">👂</span><div><div class="sint-nombre">Zumbidos de oídos</div><div class="sint-desc">Tinnitus y zumbidos relacionados con alteraciones de la columna cervical.</div></div></div>
+      <div class="sint-card reveal"><span class="sint-icon">↩️</span><div><div class="sint-nombre">Imposibilidad de girar el cuello</div><div class="sint-desc">Limitación en la movilidad cervical, tortícolis o contracturas.</div></div></div>
+      <div class="sint-card reveal"><span class="sint-icon">🧍</span><div><div class="sint-nombre">Dificultad para enderezarse</div><div class="sint-desc">Problemas posturales, escoliosis o dolor lumbar que impide mantenerse recto.</div></div></div>
+      <div class="sint-card reveal"><span class="sint-icon">🔍</span><div><div class="sint-nombre">Chequeo preventivo</div><div class="sint-desc">Control de la columna vertebral para detectar desalineaciones antes de que generen síntomas.</div></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- SOBRE MÍ -->
+<div class="sobre-wrap" id="sobre">
+  <div class="sobre">
+    <div class="sobre-visual reveal">
+      <div class="sobre-foto-placeholder">👨‍⚕️</div>
+      <div class="sobre-visual-name">Lic. Daniel Alejandro Gallo</div>
+      <div class="sobre-visual-title">Kinesiólogo · Especialista en Quiropraxia</div>
+      <div class="sobre-visual-items">
+        <div class="svi"><span>🎓</span><span>Kinesiólogo — Universidad Nacional de Córdoba</span></div>
+        <div class="svi"><span>🦴</span><span>Especialización en Quiropraxia</span></div>
+        <div class="svi"><span>🏛️</span><span>Miembro de la Fundación FullSpine</span></div>
+        <div class="svi"><span>📱</span><span>385 412 6758</span></div>
+      </div>
+    </div>
+    <div class="reveal">
+      <span class="section-tag">Sobre mí</span>
+      <h2>Lic. Daniel <em>Alejandro Gallo</em></h2>
+      <p>Me recibí de Kinesiólogo en la Universidad Nacional de Córdoba. Me especialicé en Quiropraxia y soy miembro de la Fundación FullSpine, una institución dedicada a la investigación y práctica de la salud vertebral.</p>
+      <p>Atiendo tanto en la capital de la provincia como en Termas de Río Hondo y en La Banda, acercando la Quiropraxia a cada vez más personas de Santiago del Estero.</p>
+      <p>Podés contactarme en caso de sufrir mareos, cefaleas, zumbidos, imposibilidad para girar el cuello, dificultad para enderezarse o simplemente por un chequeo preventivo.</p>
+      <div class="sobre-chips">
+        <span class="chip">Quiropraxia</span>
+        <span class="chip">Kinesiología</span>
+        <span class="chip">Columna vertebral</span>
+        <span class="chip">Fundación FullSpine</span>
+        <span class="chip">Chequeo preventivo</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SEDES -->
+<div class="sedes-wrap" id="sedes">
+  <div class="sedes">
+    <span class="section-tag reveal">Dónde atendemos</span>
+    <h2 class="section-title reveal">Nuestras <em>3 sedes</em></h2>
+    <p class="section-sub reveal">Atención en tres puntos estratégicos de Santiago del Estero para que encuentres la sede más cercana a vos.</p>
+    <div class="sedes-grid">
+      <div class="sede-card reveal">
+        <div class="sede-header">
+          <span class="sede-header-icon">🏥</span>
+          <div class="sede-nombre">NEXUS Consultorios</div>
+          <div class="sede-ciudad">Santiago del Estero Capital</div>
+        </div>
+        <div class="sede-body">
+          <div class="sede-dir"><span>📍</span><div><strong>Alsina 424</strong><span>Santiago del Estero Capital</span></div></div>
+          <a href="https://maps.google.com/?q=Alsina+424,+Santiago+del+Estero,+Argentina" target="_blank" class="sede-mapa">🗺️ Ver en Google Maps</a>
+        </div>
+      </div>
+      <div class="sede-card reveal">
+        <div class="sede-header">
+          <span class="sede-header-icon">🏥</span>
+          <div class="sede-nombre">Centro Médico Fleming</div>
+          <div class="sede-ciudad">Termas de Río Hondo</div>
+        </div>
+        <div class="sede-body">
+          <div class="sede-dir"><span>📍</span><div><strong>Fleming 9</strong><span>Termas de Río Hondo</span></div></div>
+          <a href="https://maps.google.com/?q=Fleming+9,+Termas+de+Rio+Hondo,+Argentina" target="_blank" class="sede-mapa">🗺️ Ver en Google Maps</a>
+        </div>
+      </div>
+      <div class="sede-card reveal">
+        <div class="sede-header">
+          <span class="sede-header-icon">🏥</span>
+          <div class="sede-nombre">Consultorio La Banda</div>
+          <div class="sede-ciudad">La Banda</div>
+        </div>
+        <div class="sede-body">
+          <div class="sede-dir"><span>📍</span><div><strong>San Carlos 57</strong><span>La Banda, Santiago del Estero</span></div></div>
+          <a href="https://maps.google.com/?q=San+Carlos+57,+La+Banda,+Santiago+del+Estero,+Argentina" target="_blank" class="sede-mapa">🗺️ Ver en Google Maps</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PROCESO -->
+<div class="proceso-wrap">
+  <div class="proceso">
+    <span class="section-tag reveal">Cómo funciona</span>
+    <h2 class="section-title reveal">Tu camino hacia el <em>bienestar</em></h2>
+    <div class="proceso-steps">
+      <div class="paso reveal"><div class="paso-num">1</div><h4>Contactás</h4><p>Escribís por WhatsApp o completás el formulario para pedir tu turno.</p></div>
+      <div class="paso reveal"><div class="paso-num">2</div><h4>Primera consulta</h4><p>Evaluación completa de tu columna y diagnóstico quiropráctico.</p></div>
+      <div class="paso reveal"><div class="paso-num">3</div><h4>Tratamiento</h4><p>Plan de ajustes quiroprácticos personalizado según tu situación.</p></div>
+      <div class="paso reveal"><div class="paso-num">4</div><h4>Seguimiento</h4><p>Controles periódicos para mantener tu columna en óptimas condiciones.</p></div>
+    </div>
+  </div>
+</div>
+
+<!-- TURNOS -->
+<div class="turnos-wrap" id="turnos">
+  <div class="turnos">
+    <div class="turnos-form reveal">
+      <h3>Pedí tu turno</h3>
+      <p>Completá el formulario y te contactamos para confirmar.</p>
+      <div class="fg"><label>Nombre completo</label><input type="text" id="r-nombre" placeholder="Tu nombre y apellido"></div>
+      <div class="fg"><label>Teléfono / WhatsApp</label><input type="tel" id="r-tel" placeholder="+54 385 000-0000"></div>
+      <div class="fg"><label>Email</label><input type="email" id="r-email" placeholder="tu@email.com"></div>
+      <div class="fg">
+        <label>Sede de atención</label>
+        <select id="r-sede">
+          <option value="">Seleccioná una sede</option>
+          <option value="capital">NEXUS Consultorios — Alsina 424, Capital</option>
+          <option value="termas">Centro Médico Fleming — Fleming 9, Termas R.H.</option>
+          <option value="labanda">San Carlos 57 — La Banda</option>
+        </select>
+      </div>
+      <div class="fg">
+        <label>Motivo de consulta</label>
+        <select id="r-motivo">
+          <option value="">Seleccioná el motivo</option>
+          <option value="mareos">Mareos o vértigos</option>
+          <option value="cefaleas">Cefaleas / dolor de cabeza</option>
+          <option value="zumbidos">Zumbidos de oídos</option>
+          <option value="cuello">Imposibilidad de girar el cuello</option>
+          <option value="postura">Dificultad para enderezarse</option>
+          <option value="chequeo">Chequeo preventivo</option>
+          <option value="otro">Otro</option>
+        </select>
+      </div>
+      <div class="aviso-box">⚠️ En caso de no poder asistir a la sesión, por favor dar aviso <strong>24hs antes</strong>.</div>
+      <button class="btn-turno" onclick="pedirTurno()">Solicitar turno por WhatsApp →</button>
+    </div>
+    <div class="turnos-info reveal">
+      <h3>Horarios de <em>atención</em></h3>
+      <p>Atención telefónica de lunes a viernes de 9:00 a 20:00 hs.</p>
+      <div class="info-items">
+        <div class="info-item"><span class="icon">📞</span><div><strong>Teléfono / WhatsApp</strong><span>385 412 6758</span></div></div>
+        <div class="info-item"><span class="icon">🕐</span><div><strong>Atención telefónica</strong><span>Lunes a Viernes · 9:00 a 20:00 hs</span></div></div>
+        <div class="info-item"><span class="icon">📍</span><div><strong>3 sedes disponibles</strong><span>Capital · Termas R.H. · La Banda</span></div></div>
+        <div class="info-item"><span class="icon">⚠️</span><div><strong>Cancelaciones</strong><span>Avisar con 24hs de anticipación</span></div></div>
+        <div class="info-item"><span class="icon">🏛️</span><div><strong>Fundación FullSpine</strong><span>Miembro activo</span></div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CTA -->
+<div class="cta-wrap" id="contacto">
+  <h2>¿Listo para cuidar tu columna?</h2>
+  <p>Contactanos hoy mismo y coordinamos tu primera consulta.</p>
+  <div class="cta-btns">
+    <a href="https://wa.me/5493854126758?text=Hola%20Lic.%20Gallo!%20Quiero%20pedir%20un%20turno" class="cta-btn">💬 WhatsApp</a>
+    <a href="tel:+5493854126758" class="cta-btn">📞 Llamar</a>
+    <a href="#turnos" class="cta-btn">📅 Pedir turno</a>
+  </div>
+</div>
+
+<footer>
+  <span>Lic. Daniel Alejandro Gallo</span> · Kinesiólogo · Especialista en Quiropraxia · Fundación FullSpine · Santiago del Estero 🇦🇷
+</footer>
+
+<!-- CHATBOT -->
+<button class="chat-fab" onclick="toggleChat()">
+  💬<span class="chat-notif">1</span>
+</button>
+<div class="chat-box" id="chatBox">
+  <div class="chat-head">
+    <div class="chat-avatar">🦴</div>
+    <div>
+      <div class="chat-head-name">Lic. Daniel Gallo · Quiropraxia</div>
+      <div class="chat-head-status">● En línea · Respondemos al instante</div>
+    </div>
+    <button class="chat-x" onclick="toggleChat()">×</button>
+  </div>
+  <div class="chat-msgs" id="chatMsgs"></div>
+  <div class="chat-chips">
+    <button class="cchip" onclick="qMsg('¿Qué es la quiropraxia?')">🦴 Quiropraxia</button>
+    <button class="cchip" onclick="qMsg('¿Dónde atienden?')">📍 Sedes</button>
+    <button class="cchip" onclick="qMsg('¿Cuáles son los horarios?')">🕐 Horarios</button>
+    <button class="cchip" onclick="qMsg('¿Cómo saco turno?')">📅 Turnos</button>
+    <button class="cchip" onclick="qMsg('¿Qué síntomas tratan?')">🤒 Síntomas</button>
+  </div>
+  <div class="chat-input-row">
+    <input type="text" class="chat-inp" id="chatInp" placeholder="Escribí tu pregunta..." onkeypress="if(event.key==='Enter')sendMsg()">
+    <button class="chat-send" onclick="sendMsg()">➤</button>
+  </div>
+</div>
+
+<script>
+  const RESP = [
+    { keys:['quiropraxia','quiropractica','que es','trata','ajuste'], txt:'🦴 La <strong>Quiropraxia</strong> es una disciplina de la salud que se enfoca en el diagnóstico y tratamiento de los trastornos del sistema músculo-esquelético, especialmente de la columna vertebral, mediante ajustes manuales.' },
+    { keys:['sintoma','síntoma','mareo','cefalea','zumbido','cuello','postura','dolor','enderezar'], txt:'🤒 El Lic. Gallo puede ayudarte con:<br>• Mareos y vértigos<br>• Cefaleas y dolor de cabeza<br>• Zumbidos de oídos<br>• Imposibilidad de girar el cuello<br>• Dificultad para enderezarse<br>• Chequeo preventivo' },
+    { keys:['donde','sede','lugar','atiende','ubicacion','direccion'], txt:'📍 Tenemos <strong>3 sedes</strong>:<br><br>🏥 <strong>Capital:</strong> NEXUS Consultorios — Alsina 424<br>🏥 <strong>Termas R.H.:</strong> Centro Médico Fleming — Fleming 9<br>🏥 <strong>La Banda:</strong> San Carlos 57' },
+    { keys:['horario','hora','cuando','atienden','dias','lunes','viernes'], txt:'🕐 Atención telefónica:<br><strong>Lunes a Viernes</strong> de 9:00 a 20:00 hs<br><br>📱 WhatsApp: <strong>385 412 6758</strong>' },
+    { keys:['turno','sacar','pedir','reservar','consulta','cita'], txt:'📅 Para pedir tu turno podés:<br>1. Completar el formulario en esta página<br>2. Escribir por WhatsApp al <strong>385 412 6758</strong><br><br>Recordá: si no podés asistir, avisar con 24hs de anticipación.' },
+    { keys:['cancelar','cancelacion','reprogramar','no puedo asistir'], txt:'⚠️ Si no podés asistir a tu sesión, por favor avisá con <strong>24hs de anticipación</strong> al WhatsApp <strong>385 412 6758</strong>.' },
+    { keys:['fullspine','fundacion','institución'], txt:'🏛️ El Lic. Gallo es miembro activo de la <strong>Fundación FullSpine</strong>, una institución dedicada a la investigación y práctica de la salud vertebral y la Quiropraxia.' },
+    { keys:['hola','buenas','buen dia','buenas tardes','buenas noches','hi'], txt:'¡Hola! 👋 Soy el asistente del <strong>Lic. Daniel Gallo</strong>. ¿En qué puedo ayudarte?' },
+    { keys:['gracias','ok','listo','perfecto','genial'], txt:'¡Con gusto! 😊 ¿Hay algo más en lo que pueda ayudarte?' },
+    { keys:['telefono','numero','contacto','whatsapp','llamar'], txt:'📱 WhatsApp / Teléfono: <strong>385 412 6758</strong><br>Atención Lun a Vie de 9:00 a 20:00 hs' },
+    { keys:['precio','costo','cuesta','valor','cuanto'], txt:'💰 Para información sobre precios y aranceles, contactanos directamente por WhatsApp al <strong>385 412 6758</strong>.' },
+  ];
+
+  let abierto = false;
+
+  function toggleChat() {
+    abierto = !abierto;
+    document.getElementById('chatBox').classList.toggle('open', abierto);
+    document.querySelector('.chat-notif').style.display = 'none';
+    if (abierto && document.getElementById('chatMsgs').children.length === 0) {
+      setTimeout(() => addMsg('bot', '¡Hola! 👋 Soy el asistente del <strong>Lic. Daniel Gallo</strong>, Kinesiólogo especialista en Quiropraxia. ¿En qué puedo ayudarte hoy?'), 300);
+    }
+  }
+
+  function addMsg(tipo, txt) {
+    const m = document.getElementById('chatMsgs');
+    const d = document.createElement('div');
+    d.className = 'cmsg ' + tipo;
+    d.innerHTML = '<div class="cbubble">' + txt + '</div>';
+    m.appendChild(d);
+    m.scrollTop = m.scrollHeight;
+  }
+
+  function qMsg(txt) { addMsg('usr', txt); setTimeout(() => responder(txt), 500); }
+
+  function sendMsg() {
+    const inp = document.getElementById('chatInp');
+    const txt = inp.value.trim();
+    if (!txt) return;
+    addMsg('usr', txt);
+    inp.value = '';
+    setTimeout(() => responder(txt), 500);
+  }
+
+  function responder(txt) {
+    const lower = txt.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');
+    for (const r of RESP) {
+      if (r.keys.some(k => lower.includes(k))) { addMsg('bot', r.txt); return; }
+    }
+    addMsg('bot', '🤔 No entendí tu pregunta. Escribinos directamente por WhatsApp al <strong>385 412 6758</strong> y te ayudamos enseguida. 😊');
+  }
+
+  function pedirTurno() {
+    const nombre = document.getElementById('r-nombre').value.trim();
+    const tel = document.getElementById('r-tel').value.trim();
+    const sede = document.getElementById('r-sede').value;
+    const motivo = document.getElementById('r-motivo').value;
+    if (!nombre) { showAlert('⚠️ Completá tu nombre'); return; }
+    if (!tel) { showAlert('⚠️ Completá tu teléfono'); return; }
+    if (!sede) { showAlert('⚠️ Elegí una sede'); return; }
+    if (!motivo) { showAlert('⚠️ Seleccioná el motivo'); return; }
+    const sedeTexto = document.getElementById('r-sede').options[document.getElementById('r-sede').selectedIndex].text;
+    const motivoTexto = document.getElementById('r-motivo').options[document.getElementById('r-motivo').selectedIndex].text;
+    const msg = encodeURIComponent(`Hola Lic. Gallo! Quiero pedir un turno.\n\nNombre: ${nombre}\nTeléfono: ${tel}\nSede: ${sedeTexto}\nMotivo: ${motivoTexto}`);
+    window.open(`https://wa.me/5493854126758?text=${msg}`, '_blank');
+  }
+
+  function showAlert(msg) {
+    const a = document.getElementById('alert');
+    a.textContent = msg; a.style.display = 'block';
+    setTimeout(() => a.style.display = 'none', 3500);
+  }
+
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
